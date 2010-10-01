@@ -1,0 +1,61 @@
+-*- Outline -*-
+
+* General
+** Name
+A more distinctive name would probably be a good idea.
+** Inspector modularity
+Pull Inspector stuff out of Thing?
+** Serialization
+To save/restore playspace?
+** Synchronization
+Shabby (currently moot).
+** JAX
+JAX-style invocation support.
+** JSH & "Shell" integration
+JSH command interface. Maybe Steve Kemp's shell too.
+
+* Evaluator
+** Properties
+Permit a Properties.load() for easy user customization?
+** /var/tmp alt.
+Use java.tmpdir in 1.2 (i.e. if available).
+** Compiler options
+(E.g. -deprecation.) Where needed.
+** Redefs
+Is it possible to allow class redefinitions?
+[Very difficult, esp. in 1.1.]
+
+* Main
+** `* $foo', `~ $foo'
+Implement `*' and `~' for specific variable.
+** `: int $i=1, $j; Object $o, $p=new Boolean()'
+Let `:' supply init value w/ Querier. Basically expand syntax to make it more
+natural to a Java programmer.
+** System shell
+Generally less important as other software (e.g. JSH) fulfills this role much
+better.
+*** `$ cat > foo.txt' fails
+Does not forward input.
+*** Envvars
+Does not have any useful envvars set. (Difficult to rectify portably; Java
+does not pass thru any system envvars, and loading user profile may not be
+helpful, especially if Bourne Shell is not their primary shell.)  Giving
+--login to shell helps, but is slow. Possibly could run a login shell once
+invisibly, having that run `env', and use those envvars subsequently?
+*** SIGPIPE
+Seems to fail to stop on Linux/Solaris of a pipe is used that breaks off,
+though this works fine on Irix. No apparent solution.
+** Classpath
+Would be useful to be able to interactively modify the classpath.
+[Easy to modify--hard to make evaluator honor it! Commented out for now.]
+
+* Inspector
+** One-line embedded expressions
+Indentation could be a little better.
+** `// ...'
+Should be printed in case of skipped class bodies.
+** Dictionary
+Keep track of already-inspected objects (vs. classes)?
+
+$Format: "Version $JavashRelease$. $JavashCopyright$"$
+Version 0.001. Copyright (c) 1998 Strategic Interactive Group. All rights reserved. This software may be redistributed under the terms of the GNU General Public License. There is no warranty whatsoever.
